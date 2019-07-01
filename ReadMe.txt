@@ -1,7 +1,7 @@
 # Streamlabs Chatbot Hype Meter Overlay
 A Python script for use in [Streamlabs Chatbots's](https://streamlabs.com/chatbot) built-in scripting feature which monitors chat for given keywords, and then an web overlay using Websocket events. 
 The script can also optionally switch scenes and activate sources within OBS using OBSRemote. 
-You can check out the functionality on [Github](https://github.com/HyperNeon/streamlabs-chatbot-hype-meter-overlay)
+You can check out the functionality on [Github](https://github.com/HyperNeon/Streamlabs-Chatbot-Hype-Meter-Overlay)
 
 This script will monitor all Twitch/YouTube/Mixer chat and look for a list of keywords or emotes that are configured in the Script Settings. It will then monitor hype levels over time and send websocket events to the JavaScript handlers in the overlays. There are 3 provided overlays which can be used as a starting point, but the idea is really to use those to customize your own version for your channel. The HypeGuage in particular has a whole host of features that allow for deep customization by tweaking the settings in accordance with this site: https://bernii.github.io/gauge.js/. The Spicy Meter is an alternative example that shows how this script can be used to simply unhide 1 image on top of another to draw a meter filling up effect. Finally, when the hype level reaches 100%, you have the option to trigger scene changes and source activation for a perioud of time within OBS if desired and using OBSRemote.
 
