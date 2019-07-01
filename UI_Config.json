@@ -1,0 +1,123 @@
+{
+	"output_file": "settings.json",
+	"HypePhrases": {
+		"type": "textbox",
+		"value": "gameta5OnFire,casper5CaSpicy",
+		"label": "Hype Phrases",
+		"tooltip": "Comma delimited list of phrases to monitor to increment hype. Will match exactly (including spaces). Leave this completely blank and turn off 'CountIndividualMatch' to increment Hype for all received messages",
+		"group": "General"
+	},
+	"HypeLevelCount": {
+		"type": "numberbox",
+		"label": "Hype Level Match Count",
+		"value": 100,
+		"tooltip": "How many phrase matches per LookbackMinutes is considered 100% hype",
+		"group": "General"
+	},
+	"CountIndividualMatch": {
+		"type": "checkbox",
+		"value": false,
+		"label": "Count Individual Match",
+		"tooltip": "Should multiple phrase matches in a single message be counted multiple times? If yes, check this box",
+		"group": "General"
+	},
+	"LookbackMinutes": {
+		"type": "numberbox",
+		"label": "Lookback Minutes",
+		"value": 5,
+		"tooltip": "How long to lookback to calculate hype level",
+		"group": "General"
+	},
+	"ClipAtMaxHype": {
+		"type": "checkbox",
+		"value": true,
+		"label": "Clip At Max Hype",
+		"tooltip": "Should Hype Values higher than 100% be disabled? Turn this on to lock max value at ceiling of 100",
+		"group": "General"
+	},
+	"ResetOnMaxHype": {
+		"type": "checkbox",
+		"value": true,
+		"label": "Reset On Max Hype",
+		"tooltip": "Start the meter back at zero whenever hype level reaches 100+",
+		"group": "General"
+	},
+	"ResetDelaySeconds": {
+		"type": "numberbox",
+		"label": "Reset Delay Seconds",
+		"value": 1,
+		"tooltip": "How many seconds after Max Hype to wait before resetting. Value of 0 will reset as soon as possible. Only works if Reset On Max Hype Enabled",
+		"group": "General"
+	},
+	"CooldownSeconds": {
+		"type": "numberbox",
+		"label": "After Reset Cooldown Seconds",
+		"value": 30,
+		"tooltip": "How many seconds to wait after a reset before resuming tracking again. Value of 0 means start again immediately. Only works if Reset On Max Hype Enabled",
+		"group": "General"
+	},
+	"CommandPermission": {
+      "type": "dropdown",
+	  "label": "Command Permission",
+      "value": "moderator",
+      "items": ["everyone","moderator","subscriber","editor","caster"],
+      "tooltip": "Who is able to use the !freezehypemeter, !unfreezehypemeter, and !maxhypemeter commands",
+      "group": "General"
+    },
+	"SwitchSceneOnMaxHype": {
+		"type": "textbox",
+		"value": "TestScene",
+		"label": "Switch Scene On Max Hype",
+		"tooltip": "Enter the name of a scene here to switch to it once the hype level reaches 100+. Leave blank to do nothing",
+		"group": "OBS Remote"
+	},
+	"SwitchSceneDelaySeconds": {
+		"type": "numberbox",
+		"label": "Switch Scene Delay Seconds",
+		"value": 1,
+		"tooltip": "How long after max hype to wait before switching the scene. Value of zero will switch scene as soon as possible",
+		"group": "OBS Remote"
+	},
+	"EnableSourceOnMaxHype": {
+		"type": "textbox",
+		"value": "TestSource",
+		"label": "Enable Source On Max Hype",
+		"tooltip": "Enter the name of a source to turn on once hype level reaches 100+. Leave blank to do nothing",
+		"group": "OBS Remote"
+	},
+	"EnableSourceDelaySeconds": {
+		"type": "numberbox",
+		"label": "Enable Source Delay Seconds",
+		"value": 1,
+		"tooltip": "How long after max hype to wait before enabling the source. Value of zero will enable source as soon as possible",
+		"group": "OBS Remote"
+	},
+	"EnabledSourceSeconds": {
+		"type": "numberbox",
+		"label": "Enabled Source Seconds",
+		"value": 10,
+		"tooltip": "How many seconds to leave the source enabled after end of Enable Source Delay Seconds. Value of 0 will leave the source on permanently",
+		"group": "OBS Remote"
+	},
+	"BlockLengthSeconds": {
+		"type": "numberbox",
+		"label": "Block Length Seconds",
+		"value": 5,
+		"tooltip": "Phrase matches are grouped in chunks of this duration. The oldest chunk is dropped off the back of the list after lookback minutes is hit. A smaller number here is more responsive but takes more resources",
+		"group": "Performance (Advanced)"
+	},
+	"TickTimeSeconds": {
+		"type": "numberbox",
+		"label": "Tick Time Seconds",
+		"value": 5,
+		"tooltip": "How often should the overlay be updated?",
+		"group": "Performance (Advanced)"
+	},
+	"Open ReadMe": {
+        "type": "button",
+        "label": "Open ReadMe",
+        "tooltip": "Open ReadMe file",
+        "function": "OpenReadMe",
+		"wsevent": "EVENT_NONE"
+    }
+}

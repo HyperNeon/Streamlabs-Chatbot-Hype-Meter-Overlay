@@ -1,0 +1,38 @@
+:root {
+  --main-cutoff: 1300px;
+}
+
+body, html {
+	padding: 0;
+	margin: 0;
+
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: normal 50px/1 "bangers", Helvetica, sans-serif;
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  letter-spacing: 3px;
+}
+
+#hypeMeter {
+	position: relative;
+	height: 1939px;
+}
+
+#spicy-empty {
+	position: absolute;
+	left: 0
+}
+
+#spicy-full {
+	object-fit: none;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: var(--main-cutoff);
+	object-position: 0% 100%;
+}

@@ -1,0 +1,53 @@
+:root {
+  --main-cutoff: 200px;
+}
+
+body, html {
+	padding: 0;
+	margin: 0;
+
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: normal 50px/1 "bangers", Helvetica, sans-serif;
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  letter-spacing: 3px;
+}
+#hypeLevelText {
+	color: black;
+}
+
+#hypeMeter {
+	position: relative;
+	height: 355px;
+}
+
+#gif {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#hypeGauge {
+	position: absolute;
+    top: 150px;
+    left: 230px;
+}
+
+#spicy-empty {
+	position: absolute;
+	left: 0
+}
+
+#spicy-full {
+	object-fit: none;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: var(--main-cutoff);
+	object-position: 0% 100%;
+}
