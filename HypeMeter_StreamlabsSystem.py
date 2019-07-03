@@ -19,7 +19,7 @@ ScriptName = "Hype Meter"
 Website = "github.com/hyperneon"
 Description = "Hype Meter Overlay That Fills Based on Chat Phrase/Emote Matches"
 Creator = "GameTangent" 
-Version = "1.1.0"
+Version = "1.1.3"
 
 # ---------------------------------------
 #	Set Variables

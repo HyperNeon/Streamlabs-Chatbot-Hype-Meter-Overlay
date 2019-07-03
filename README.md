@@ -27,7 +27,7 @@ These commands are only usable by chatters with the configured permission level 
 
 Although the script is called "Hype Meter" it can really be used to track any type of chat activity over time if configured properly. For example: you could automatically track specific word usage over several hours, by simply setting the LookbackMinutes to several hours which essentially removes any decay of the meter. In these situations you may also want to update the BlockLengthSeconds and TickTimeSeconds to only be every few minutes rather than seconds since you'll be tracking data over a longer period. You can also track any Chat Activity, not just specific phrase matches, by leaving the "HypePhrases" field empty, which effectively matches every chat message.
 
-Streamers using Streamlabs Chatbot Rank Change Announcer:
+Streamers using Streamlabs Chatbot Hype Meter Overlay:
 * https://www.twitch.tv/gametangent
 * https://www.twitch.tv/casperthespicyghost
 
