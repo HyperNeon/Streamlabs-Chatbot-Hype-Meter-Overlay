@@ -19,7 +19,7 @@ ScriptName = "Hype Meter"
 Website = "github.com/hyperneon"
 Description = "Hype Meter Overlay That Fills Based on Chat Phrase/Emote Matches"
 Creator = "GameTangent" 
-Version = "1.1.3"
+Version = "1.1.4"
 
 # ---------------------------------------
 #	Set Variables
@@ -45,11 +45,15 @@ class Settings(object):
         except:
             #TODO Allow this to take an optional list of phrases to look for intead of single phrase
             self.HypePhrases = "gameta5OnFire,casper5CaSpicy"
+            self.MaxHypeChatMessage = "Engage Maximum Hype!"
+            self.MaxHypeSound = ""
+            self.MaxHypeSoundVolume = 1.0
             self.SwitchSceneOnMaxHype = "TestScene"
             self.SwitchSceneDelaySeconds = 1
             self.EnableSourceOnMaxHype = "TestSource"
             self.EnableSourceDelaySeconds = 1
             self.EnabledSourceSeconds = 10
+            self.EnableSourceInScene = ""
             self.CommandPermission = "moderator"
             self.ResetOnMaxHype = True
             self.ResetDelaySeconds = 1
@@ -87,25 +91,25 @@ def SwitchSceneDelayTimer(scene, seconds):
 	Parent.SetOBSCurrentScene(scene, CallbackLogger)
 	return
     
-def EnableSourceDelayTimer(source, seconds, enabled_seconds):
+def EnableSourceDelayTimer(source, seconds, enabled_seconds, scene):
     """ Enables a given source after set seconds. """
     counter = 0
     while counter < seconds:
         time.sleep(1)
         counter += 1
-    Parent.SetOBSSourceRender(source, True, None, CallbackLogger)
+    Parent.SetOBSSourceRender(source, True, scene, CallbackLogger)
     if enabled_seconds > 0:
         # Start a new thread for the disable timer
-        threading.Thread(target=DisableSourceTimer, args=(source, enabled_seconds)).start()
+        threading.Thread(target=DisableSourceTimer, args=(source, enabled_seconds, scene)).start()
     return
 
-def DisableSourceTimer(source, seconds):
+def DisableSourceTimer(source, seconds, scene):
 	""" Disables a given source in optional scene after set seconds. """
 	counter = 0
 	while counter < seconds:
 		time.sleep(1)
 		counter += 1
-	Parent.SetOBSSourceRender(source, False, None, CallbackLogger)
+	Parent.SetOBSSourceRender(source, False, scene, CallbackLogger)
 	return
 
 def SendHypeLevelWebsocket(hype_level):
@@ -160,13 +164,22 @@ def ActivateMaximumHype():
     global AwaitingResetStartTime
 
     # Do various things depending on what the user has configured
+    if ScriptSettings.MaxHypeChatMessage:
+        # If user has input a chat message, send the chat message
+        Parent.SendStreamMessage(ScriptSettings.MaxHypeChatMessage)
+    
+    if ScriptSettings.MaxHypeSound:
+        # If user has given us a file path to a sound, play the sound
+        Parent.PlaySound(ScriptSettings.MaxHypeSound,ScriptSettings.MaxHypeSoundVolume)
+    
     if ScriptSettings.SwitchSceneOnMaxHype:
         # Only if the user has input a scene name do we attempt to switch the scene after configured delay
         threading.Thread(target=SwitchSceneDelayTimer, args=(ScriptSettings.SwitchSceneOnMaxHype, ScriptSettings.SwitchSceneDelaySeconds)).start()
         
     if ScriptSettings.EnableSourceOnMaxHype:
         # Set scene target and call OBS Source Renderer after configured delay
-        threading.Thread(target=EnableSourceDelayTimer, args=(ScriptSettings.EnableSourceOnMaxHype, ScriptSettings.EnableSourceDelaySeconds, ScriptSettings.EnabledSourceSeconds)).start()
+        scene = ScriptSettings.EnableSourceInScene if ScriptSettings.EnableSourceInScene else None
+        threading.Thread(target=EnableSourceDelayTimer, args=(ScriptSettings.EnableSourceOnMaxHype, ScriptSettings.EnableSourceDelaySeconds, ScriptSettings.EnabledSourceSeconds, scene)).start()
     
     if ScriptSettings.ResetOnMaxHype:
         AwaitingReset = True

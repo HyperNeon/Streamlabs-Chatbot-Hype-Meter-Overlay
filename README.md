@@ -9,6 +9,8 @@ This script will monitor all Twitch/YouTube/Mixer chat and look for a list of ke
 
 Aside from the Javascript and HTML customizations, the script allows you to customize:
 * The list of phrases to match on in chat
+* Chat message to send at 100%
+* Audio and volume to play at 100%
 * How many matches constitutes 100% meter
 * Whether to count multiple matches within the same chat messages as a single match or multiple
 * How long the lookback window should be for tracking messages

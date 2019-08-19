@@ -28,6 +28,30 @@
 		"tooltip": "How long to lookback to calculate hype level",
 		"group": "General"
 	},
+	"MaxHypeChatMessage": {
+		"type": "textbox",
+		"value": "Engage Maximum Hype!",
+		"label": "Chat Message on Max Hype",
+		"tooltip": "Whatever you type here will be posted to chat when Max Hype is reached. Leave blank for no message. NOTE: Chatbot will not respond to itself so commands worn't work here",
+		"group": "General"
+	},
+	"MaxHypeSound": {
+		"type": "textbox",
+		"value": "",
+		"label": "Sound on Max Hype",
+		"tooltip": "Enter the full file path to the sound you'd like to play when Max Hype is reached. Leave blank for no sound. (ex. 'C:\\airhorn.mp3')",
+		"group": "General"
+	},
+	"MaxHypeSoundVolume": {
+		"type": "slider",
+		"label": "Max Hype Sound Volume",
+		"value": 1,
+		"min": 0,
+		"max": 1,
+		"ticks": 0.1,
+		"tooltip": "Choose the volume of the Max Hype Sound that will play when Max Hype is reached. This does nothing if MaxHypeSound is left blank",
+		"group": "General"
+	},
 	"ClipAtMaxHype": {
 		"type": "checkbox",
 		"value": true,
@@ -83,6 +107,13 @@
 		"value": "TestSource",
 		"label": "Enable Source On Max Hype",
 		"tooltip": "Enter the name of a source to turn on once hype level reaches 100+. Leave blank to do nothing",
+		"group": "OBS Remote"
+	},
+	"EnableSourceInScene": {
+		"type": "textbox",
+		"value": "NestedScene",
+		"label": "Enable Source In Specific Scene",
+		"tooltip": "Enter the scene name in which you'd like to activate the source. Works great for nested scenes. Leave blank to activate in currently active scene",
 		"group": "OBS Remote"
 	},
 	"EnableSourceDelaySeconds": {
