@@ -8,6 +8,7 @@ import codecs
 import os
 import time
 import threading
+from collections import deque
 
 clr.AddReference("IronPython.SQLite.dll")
 clr.AddReference("IronPython.Modules.dll")
@@ -19,17 +20,16 @@ ScriptName = "Hype Meter"
 Website = "github.com/hyperneon"
 Description = "Hype Meter Overlay That Fills Based on Chat Phrase/Emote Matches"
 Creator = "GameTangent" 
-Version = "1.2.0"
+Version = "1.2.1"
 
 # ---------------------------------------
 #	Set Variables
 # ---------------------------------------
 
-
 SettingsFile = os.path.join(os.path.dirname(__file__), "settings.json")
 ReadMeFile = os.path.join(os.path.dirname(__file__), "ReadMe.txt")
 ScriptSettings = None
-
+AudioPlaybackQueue = deque()
 
 # ---------------------------------------
 #	Script Classes
@@ -169,8 +169,8 @@ def ActivateMaximumHype():
         Parent.SendStreamMessage(ScriptSettings.MaxHypeChatMessage)
     
     if ScriptSettings.MaxHypeSound:
-        # If user has given us a file path to a sound, play the sound
-        Parent.PlaySound(ScriptSettings.MaxHypeSound,ScriptSettings.MaxHypeSoundVolume)
+        # If user has given us a file path to a sound, enqueue the sound
+        AudioPlaybackQueue.append(ScriptSettings.MaxHypeSound)
     
     if ScriptSettings.SwitchSceneOnMaxHype:
         # Only if the user has input a scene name do we attempt to switch the scene after configured delay
@@ -263,6 +263,13 @@ def Execute(data):
     return
 
 def Tick():
+    # Audio file in the queue?
+    if AudioPlaybackQueue:
+        # Try to playback left most item in queue
+        if Parent.PlaySound(AudioPlaybackQueue[0], ScriptSettings.MaxHypeSoundVolume):
+            # Pop from queue if has been played
+            AudioPlaybackQueue.popleft()
+            
     if AwaitingReset and time.time() - AwaitingResetStartTime >= ScriptSettings.ResetDelaySeconds:
         ActivateReset()
 
